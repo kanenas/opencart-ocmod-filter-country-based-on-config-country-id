@@ -9,16 +9,14 @@
   <file path="catalog/model/localisation/country.php" error="log">
     <operation error="skip">
       <search><![CDATA[$country_data = $this->cache->get('country.catalog');]]></search>
-      <add position="replace"><![CDATA[
-    //$country_data = $this->cache->get('country.catalog');
-    ]]></add>
+      <add position="replace"><![CDATA[//$country_data = $this->cache->get('country.catalog');]]></add>
     </operation>
     <operation error="skip">
       <search><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");]]></search>
       <add position="replace"><![CDATA[
-      $config_country_id = (int)$this->config->get('config_country_id');
-      $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' AND country_id = '" . $config_country_id . "' ORDER BY name ASC");
-      //$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");
+			$config_country_id = (int)$this->config->get('config_country_id');
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' AND country_id = '" . $config_country_id . "' ORDER BY name ASC");
+			//$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");
 	  ]]></add>
     </operation>
   </file>
