@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <id><![CDATA[[OCMOD] Filter country based on config_country_id]]></id>
+  <name><![CDATA[Filter country based on config_country_id]]></name>
+  <code>knns-filter-country-based-on-config-country-id</code>
+  <version>0.1.0</version>
+  <author><![CDATA[<font color="#7F458C"><b>kanenas.net (aka Nikolas Branis)</b></font> - nbran@kanenas.net]]></author>
+  <link>https://kanenas.net/</link>
+  <file path="catalog/model/localisation/country.php" error="log">
+    <operation error="skip">
+      <search><![CDATA[$country_data = $this->cache->get('country.catalog');]]></search>
+      <add position="replace"><![CDATA[
+    //$country_data = $this->cache->get('country.catalog');
+    ]]></add>
+    </operation>
+    <operation error="skip">
+      <search><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");]]></search>
+      <add position="replace"><![CDATA[
+      $config_country_id = (int)$this->config->get('config_country_id');
+      $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' AND country_id = '" . $config_country_id . "' ORDER BY name ASC");
+      //$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' ORDER BY name ASC");
+	  ]]></add>
+    </operation>
+  </file>
+</modification>
